@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">   
+    
+    <title>Flask Webpage</title>
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <marquee class="h1 bg-secondary text-white mb-3">Detect Objects In Image</marquee>
+        <div class="bg-light shadow mx-auto p-4">
+            <h2 class="">Upload an image:</h2>
+            <form class="form-group" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input class="form-control m-2" type="file" name="file_name" required>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Upload">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-light col-md-12 shadow mx-auto my-4">
+            <div class="row">                
+                {% for image in images %}
+                <a class="col-12 col-md-6" href="{{ url_for('serve_image', filename=image) }}" target="_blank">
+                    <img src="{{ url_for('serve_image', filename=image) }}" alt="loading..." width="100%">
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
